@@ -16,8 +16,9 @@ include('includes/header.php')
 
                     <?php
                     $paramResult = checkParamId('id');
-                    if (is_numeric($paramResult)) {
-                        // echo '<h5>' . $paramResult . '</h5>';
+                    if (!is_numeric($paramResult)) {
+                         echo '<h5>' . $paramResult . '</h5>';
+                        return false;
                     }
                     $user = getById('users', checkParamId('id'));
                     if ($user['status'] == 200) {

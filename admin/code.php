@@ -27,7 +27,7 @@ if (isset($_POST['saveUser'])) {
   }
 }
 
-if (isset($_POST('updateUser'))) {
+if (isset($_POST['updateUser'])) {
   $name = validate($_POST['name']);
   $phone = validate($_POST['phone']);
   $email = validate($_POST['email']);
@@ -50,11 +50,11 @@ if (isset($_POST('updateUser'))) {
     password ='$password',
     is_ban ='$is_ban',
     role ='$role'
-    WHERE id='$usreId'";
+    WHERE id='$userId'";
      
      $reuslt = mysqli_query($conn,$query);
      if ($reuslt) {
-      redirect('users.php','User\Admin Added Sucessfully');
+      redirect('users.php','User\Admin Updated Sucessfully');
      } else {
       redirect('users-create.php','Something Went Wrong');
      }
