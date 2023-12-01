@@ -12,7 +12,8 @@ include('includes/header.php')
                 </h4>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <?= alertMessage(); ?>
+                <form action="code.php" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -50,7 +51,7 @@ include('includes/header.php')
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
-                                <label>Select Role</label>
+                                <label>Is Ban</label>
                                 <br>
                                 <input type="checkbox" name="is_ban" style="width:30px;height:30px;" class="form-control">
                             </div>
