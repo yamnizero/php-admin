@@ -43,7 +43,13 @@ include('includes/header.php')
 
                                     <td>
                                         <a href="users-edit.php?id=<?=$userItem['id']?>" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="users-delete.php" class="btn btn-danger btn-sm mx-2">Delete</a>
+                                        <a href="users-delete.php?id=<?=$userItem['id']?>" 
+                                        class="btn btn-danger btn-sm mx-2"
+                                        onclick="return confirm('Are You Sure You Want to Delete This Data? ')";
+                                        >
+                                        
+                                        Delete
+                                    </a>
                                     </td>
                                 </tr>
                             <?php

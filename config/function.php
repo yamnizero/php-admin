@@ -79,3 +79,11 @@ function getById($tableName,$id) {
      }
 
 }
+function deleteQuery($tableName,$id){
+    global $conn;
+    $table = validate($tableName);
+    $id = validate($id);
+    $query = "DELETE FROM $table WHERE id='$id'";
+    $result =mysqli_query($conn,$query);
+    return $result;
+}
