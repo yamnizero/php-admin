@@ -1,5 +1,6 @@
 <?php
-require '../config/function.php'
+require '../config/function.php';
+include('authentication.php');
 ?>
 
 <!DOCTYPE html>

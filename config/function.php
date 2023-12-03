@@ -8,6 +8,14 @@ function validate($inputData){
     $validatedData =mysqli_real_escape_string($conn,$inputData);
     return trim($validatedData);
 }
+
+function logoutSession(){
+    
+    unset($_SESSION['auth']);
+    unset($_SESSION['loggedInUserRole']);
+    unset($_SESSION['loggedInUser']);
+}
+
  function redirect($url,$status){
     $_SESSION['status'] = $status;
     header('location: '.$url);

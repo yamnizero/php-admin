@@ -1,6 +1,10 @@
 <?php 
 $pageTitle = "Login";
 include('includes/header.php') ;
+if (isset($_SESSION['auth'])) {
+    redirect('index.php', 'You are already logged in');
+
+}
 ?>
 
     <div class="py-4 bg-secondary text-center">

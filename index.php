@@ -7,7 +7,7 @@ $pageTitle = "Home";
 
 
 
-
+<?=alertMessage();?>
 
 
 
