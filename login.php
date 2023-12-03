@@ -16,6 +16,9 @@ include('includes/header.php') ;
                             <h4>Login</h4>
                         </div>
                         <div class="card-body">
+
+                            <?=alertMessage();?>
+
                             <form action="login-code.php" method="POST">
 
                                 <div class="mb-3">
