@@ -5,18 +5,5 @@ $pageTitle = "About Us";
 
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php include('includes/footer.php') ?>
     

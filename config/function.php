@@ -95,3 +95,10 @@ function deleteQuery($tableName,$id){
     $result =mysqli_query($conn,$query);
     return $result;
 }
+
+function webSetting($columnName) {
+    $setting = getById('settings',1);
+    if ($setting['status'] == 200) {
+      return  $setting['data'][$columnName];
+    }
+}
