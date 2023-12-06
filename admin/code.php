@@ -107,3 +107,50 @@
       redirect('settings.php', 'Something Went Wrong!');
     }
   }
+
+
+  if (isset($_POST['saveSocialMedia'])) {
+    $name = validate($_POST['name']);
+    $url = validate($_POST['url']);
+    $status = validate($_POST['status']) == true ? 1:0;
+
+
+    if ($name != '' || $url != '') {
+      $query = "INSERT INTO social_medias (name,url,status) VALUES ('$name','$url','$status')";
+
+      $reuslt = mysqli_query($conn, $query);
+      if ($reuslt) {
+        redirect('social-media.php', 'Social Media Added Sucessfully');
+      } else {
+        redirect('social-media-create.php', 'Something Went Wrong');
+      }
+    } else {
+      redirect('social-media-create.php', 'Please Fill All Input Fields');
+    }
+  }
+
+  if (isset($_POST['updateSocialMedia'])) {
+    $name = validate($_POST['name']);
+    $url = validate($_POST['url']);
+    $status = validate($_POST['status']) == true ? 1:0;
+
+    $socialMediaId = validate($_POST['socialMediaId']);
+
+
+    if ($name != '' || $url != '') {
+      $query = "UPDATE social_medias SET
+       name='$name',
+        url='$url',
+        status='$status'
+          WHERE id='$socialMediaId' LIMIT 1";
+
+      $reuslt = mysqli_query($conn, $query);
+      if ($reuslt) {
+        redirect('social-media.php', 'Social Media Updated Sucessfully');
+      } else {
+        redirect('social-media-edit.php?id='. $socialMediaId, 'Something Went Wrong');
+      }
+    } else {
+      redirect('social-media-edit.php?id='. $socialMediaId, 'Please Fill All Input Fields');
+    }
+  }

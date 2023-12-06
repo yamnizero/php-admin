@@ -5,7 +5,7 @@ require '../config/function.php';
 $paraResult = checkParamId('id');
 if (is_numeric($paraResult)) {
         $userId = validate($paraResult);
-        $user = getById('users',$paraResult);
+        $user = getById('users',$userId);
     if ($user['status'] == 200) {
         $userDeleteRes = deleteQuery('users',$userId);
         if ($userDeleteRes) {
