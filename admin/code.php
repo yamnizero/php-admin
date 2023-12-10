@@ -168,11 +168,11 @@
       if ($imageFileType != 'jpg' && $imageFileType != 'jpeg' && $imageFileType != 'png') {
         redirect('services.php', 'Sorry, Only JPG, JPEG, PNG images Only');
       }
-      
+
       $path = "../assets/uploads/services/";
       $imgExt = pathinfo($image, PATHINFO_EXTENSION);
       $filename = time() . '.' . $imgExt;
-      $fileImage = '../assets/uploads/services/' . $filename;
+      $fileImage = 'assets/uploads/services/' . $filename;
     } else {
       $finalImage = NULL;
     }
@@ -199,6 +199,70 @@
     } else {
       redirect('services-create.php', 'Something Went Wrong');
     }
-  } else {
-    redirect('services-create.php', 'Please Fill All Input Fields');
+  } 
+
+  if (isset($_POST['updateServices'])) {
+    $servicesId = validate($_POST['id']);
+    $name = validate($_POST['name']);
+
+    $slug = str_replace(' ', '-', strtolower($name));
+    $small_description = validate($_POST['small_description']);
+    $long_description = validate($_POST['long_description']);
+
+    $services = getById('services',$servicesId);
+   
+    if ($_FILES['image']['size'] > 0) {
+      $image = $_FILES['image']['name'];
+
+      $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+      if ($imageFileType != 'jpg' && $imageFileType != 'jpeg' && $imageFileType != 'png') {
+        redirect('services.php', 'Sorry, Only JPG, JPEG, PNG images Only');
+      }
+
+      $path = "../assets/uploads/services/";
+
+      $deleteImage = "../".$path.$services['data']['image'];
+      if (file_exists( $deleteImage)) {
+        unlink($deleteImage);
+      }
+
+ 
+      $imgExt = pathinfo($image, PATHINFO_EXTENSION);
+      $filename = time() . '.' . $imgExt;
+      $fileImage = 'assets/uploads/services/' . $filename;
+    } else {
+      $finalImage =  $services['data']['image'];
+    }
+
+
+
+    $meta_title = validate($_POST['meta_title']);
+    $meta_description = validate($_POST['meta_description']);
+    $meta_keyword = validate($_POST['meta_keyword']);
+    $status = validate($_POST['status']) == true ? 1 : 0;
+
+    $query = "UPDATE services SET 
+        name ='$name',
+        slug ='$slug',
+        small_description ='$small_description',
+        long_description ='$long_description',
+        image='$fileImage',
+        meta_title ='$meta_title',
+        meta_description ='$meta_description',
+        meta_keyword ='$meta_keyword',
+        status ='$status'
+        WHERE id='$servicesId'
+        ";
+
+    $result = mysqli_query($conn,$query);
+    if ($result) {
+      if ($_FILES['image']['size'] > 0) {
+
+        move_uploaded_file($_FILES['image']['tmp_name'], $path . $filename);
+      }
+
+      redirect('services-edit.php?'.$servicesId, 'Services Updated Sucessfully');
+    } else {
+      redirect('services-edit.php?id='.$servicesId, 'Something Went Wrong');
+    }
   }
